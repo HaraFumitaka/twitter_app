@@ -70,7 +70,7 @@ jobs:
       - name: Run frontend tests
         run: |
           cd frontend
-          npx ng test --watch=false --browsers=ChromeHeadless
+          ng test --watch=false --browsers=ChromeHeadlessNoSandbox
 
   build-and-test-docker:
     runs-on: ubuntu-latest

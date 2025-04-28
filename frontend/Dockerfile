@@ -2,6 +2,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Chrome と必要な依存関係をインストール
+RUN apk add --no-cache chromium
+
+# 環境変数の設定
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 # Angular CLIをグローバルにインストール
 RUN npm install -g @angular/cli
 

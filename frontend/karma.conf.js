@@ -15,6 +15,20 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--headless',
+          '--disable-setuid-sandbox',
+          '--remote-debugging-port=9222'
+        ]
+      }
+    },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
