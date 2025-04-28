@@ -115,8 +115,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "testFiles": "tests/**/*.spec.ts"
+            "scripts": []
           }
         }
       }
