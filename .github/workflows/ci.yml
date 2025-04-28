@@ -89,7 +89,7 @@ jobs:
           # 簡単なヘルスチェック
           docker run --name test-backend -d -p 5001:5000 twitter-backend
           sleep 10
-          curl --fail http://localhost:5000/ || exit 1
+          curl --fail http://localhost:5001/ || exit 1
       
       - name: Build frontend Docker image
         run: |
