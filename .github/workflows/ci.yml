@@ -87,7 +87,7 @@ jobs:
         run: |
           docker build -t twitter-backend -f backend/Dockerfile .
           # 簡単なヘルスチェック
-          docker run --name test-backend -d -p 5000:5000 twitter-backend
+          docker run --name test-backend -d -p 5001:5000 twitter-backend
           sleep 10
           curl --fail http://localhost:5000/ || exit 1
       
