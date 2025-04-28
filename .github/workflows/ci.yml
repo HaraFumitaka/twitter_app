@@ -56,6 +56,12 @@ jobs:
           cd frontend
           npm ci
 
+      - name: Install ESLint
+        run: |
+          cd frontend
+          npm install --save-dev @angular-eslint/schematics
+          npx ng add @angular-eslint/schematics --skip-confirmation
+
       - name: Lint Angular code
         run: |
           cd frontend
