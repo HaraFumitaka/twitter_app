@@ -96,6 +96,7 @@ jobs:
             echo "Health check failed, checking container logs:"
             docker logs test-backend
             exit 1
+          fi
       
       - name: Build frontend Docker image
         run: |
