@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from sqlalchemy.orm import Session
 
-from ..database.session import get_db
-from ..crud.users import create_user, authenticate_user, get_user_by_email, get_user_by_user_id
-from .schemas import UserCreate, UserLogin, UserResponse, SessionData
-from .utils import set_session_cookie, delete_session_cookie, get_current_user_session, require_authenticated_user
+from src.database.session import get_db
+from src.crud.users import create_user, authenticate_user, get_user_by_email, get_user_by_user_id
+from src.auth.schemas import UserCreate, UserLogin, UserResponse, SessionData
+from src.auth.utils import set_session_cookie, delete_session_cookie, get_current_user_session, require_authenticated_user
 
 router = APIRouter()
 

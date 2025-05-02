@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 from typing import Optional
 import json
 
-from ..config.settings import settings
-from .schemas import SessionData
+from src.config.settings import settings
+from src.auth.schemas import SessionData
 
 # パスワードハッシュ化のコンテキスト
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

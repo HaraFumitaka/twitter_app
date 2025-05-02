@@ -2,9 +2,9 @@
 from sqlalchemy.orm import Session
 from typing import Optional
 
-from ..models.user import User
-from ..auth.schemas import UserCreate
-from ..auth.utils import get_password_hash, verify_password
+from src.models.user import User
+from src.auth.schemas import UserCreate
+from src.auth.utils import get_password_hash, verify_password
 
 # ユーザー取得（メールアドレスで）
 def get_user_by_email(db: Session, email: str) -> Optional[User]:

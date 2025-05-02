@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from ...auth.router import router as auth_router
+from src.auth.router import router as auth_router
 
 # メインAPIルーターを作成
 api_router = APIRouter()

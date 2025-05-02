@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Text, Date, TIMESTAMP, text, BigInteger
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
-from ..database.session import Base
+from src.database.session import Base
 
 class User(Base):
     __tablename__ = "Users"  # DBのテーブル名と一致させる
