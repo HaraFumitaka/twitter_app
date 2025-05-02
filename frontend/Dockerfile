@@ -21,7 +21,7 @@ RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo 'if [ -f "/app/package.json" ]; then' >> /entrypoint.sh && \
     echo '  echo "既存のAngularプロジェクトを検出しました"' >> /entrypoint.sh && \
     echo '  echo "依存関係をインストールしています..."' >> /entrypoint.sh && \
-    echo '  npm install --save-dev @angular-devkit/build-angular' >> /entrypoint.sh && \
+    echo '  npm install' >> /entrypoint.sh && \
     echo 'else' >> /entrypoint.sh && \
     echo '  echo "新規Angularプロジェクトを作成します..."' >> /entrypoint.sh && \
     echo '  ng new twitter-app --skip-git --routing=true --style=scss --skip-tests --directory=.' >> /entrypoint.sh && \
