@@ -14,6 +14,7 @@ services:
     - db_data:/var/lib/mysql
     - ./database/log/mysql:/var/log/mysql
     - ./database/my.conf:/etc/mysql/conf.d/my.conf
+    - ./database/init:/docker-entrypoint-initdb.d
     ports:
     - 3306:3306
 
