@@ -17,3 +17,4 @@ class Tweet(Base):
     likes = relationship("Like", back_populates="tweet", cascade="all, delete-orphan")
     retweets = relationship("Retweet", back_populates="tweet", cascade="all, delete-orphan")
     bookmarks = relationship("Bookmark", back_populates="tweet", cascade="all, delete-orphan")
+    replies = relationship("Reply", back_populates="tweet", cascade="all, delete-orphan")
