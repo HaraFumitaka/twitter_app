@@ -31,7 +31,7 @@ services:
     ports:
       - "5001:5000" # FastAPIのデフォルトポート
     volumes:
-      - ./backend:/app
+      - ./backend:/backend
 
   frontend:
     container_name: twitter-frontend
@@ -43,7 +43,7 @@ services:
     ports:
       - "4200:4200"  # Angularの開発サーバーポート
     volumes:
-      - ./frontend:/app
+      - ./frontend:/frontend
       - /app/node_modules
     environment:
       - NODE_ENV=development
