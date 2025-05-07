@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.config.settings import settings
-from src.api.routes import api_router
+from src.api.routes.router import api_router
 
 app = FastAPI(
     title="Twitter App API",
