@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-WORKDIR /app
+WORKDIR /frontend
 
 # Chrome と必要な依存関係をインストール
 RUN apk add --no-cache chromium
