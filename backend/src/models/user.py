@@ -27,3 +27,4 @@ class User(Base):
     likes = relationship("Like", back_populates="user", cascade="all, delete-orphan")
     retweets = relationship("Retweet", back_populates="user", cascade="all, delete-orphan")
     bookmarks = relationship("Bookmark", back_populates="user", cascade="all, delete-orphan")
+    replies = relationship("Reply", back_populates="user", cascade="all, delete-orphan")
