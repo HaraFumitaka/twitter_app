@@ -83,7 +83,7 @@
             {{ tweet.tweet_content }}
           </div>
           <div class="tweet-actions">
-            <button class="action-btn reply-btn" title="返信">
+            <button class="action-btn reply-btn" title="返信" (click)="navigateToTweetDetail(tweet)">
               <span class="icon">💬</span>
               <span class="count" *ngIf="tweet.replies_count > 0">{{ tweet.replies_count }}</span>
             </button>

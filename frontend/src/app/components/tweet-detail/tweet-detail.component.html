@@ -1,0 +1,122 @@
+<div class="tweet-detail-container">
+  <div class="header">
+    <button class="back-btn" (click)="goBack()">戻る</button>
+    <h1>ツイート</h1>
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    読み込み中...
+  </div>
+
+  <!-- ツイート詳細 -->
+  <div class="tweet-detail" *ngIf="tweet">
+    <div class="avatar">{{ tweet.user_name.charAt(0) }}</div>
+    <div class="tweet-content">
+      <div class="tweet-header">
+        <span class="user_name">{{ tweet.user_name }}</span>
+        <span class="user-id">{{ tweet.user_id }}</span>
+        <span class="timestamp">· {{ tweet.created_at | date:'medium' }}</span>
+      </div>
+      <div class="tweet-body">
+        {{ tweet.tweet_content }}
+      </div>
+      <div class="tweet-stats">
+        <span class="stat"><strong>{{ tweet.replies_count || 0 }}</strong> 返信</span>
+        <span class="stat"><strong>{{ tweet.retweet_count }}</strong> リツイート</span>
+        <span class="stat"><strong>{{ tweet.like_count }}</strong> いいね</span>
+      </div>
+      <div class="tweet-actions">
+        <button class="action-btn reply-btn" title="返信">
+          <span class="icon">💬</span>
+        </button>
+        <button class="action-btn retweet-btn" [class.active]="tweet.is_retweeted" (click)="retweetTweet(tweet)" title="リツイート">
+          <span class="icon icon-retweet"></span>
+        </button>
+        <button class="action-btn like-btn" [class.active]="tweet.is_liked" (click)="likeTweet(tweet)" title="いいね">
+          <span class="icon icon-like"></span>
+        </button>
+        <button class="action-btn bookmark-btn" [class.active]="tweet.is_bookmarked" (click)="bookmarkTweet(tweet)" title="ブックマーク">
+          <span class="icon icon-bookmark"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- リプライ投稿フォーム -->
+  <div class="reply-composer" *ngIf="tweet">
+    <form [formGroup]="replyForm" (ngSubmit)="postReply()">
+      <div class="avatar">{{ user_name.charAt(0) }}</div>
+      <div class="compose-area">
+        <textarea
+          formControlName="reply_content"
+          placeholder="返信をツイート"
+          rows="3"
+          maxlength="280"
+        ></textarea>
+        <div class="compose-footer">
+          <div class="char-count" [ngClass]="{'warning': replyForm.get('reply_content')?.value?.length > 260}">
+            {{ replyForm.get('reply_content')?.value?.length || 0 }}/280
+          </div>
+          <button
+            type="submit"
+            [disabled]="replyForm.invalid || isLoading"
+            class="reply-submit-btn"
+          >
+            {{ isLoading ? '送信中...' : '返信する' }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- リプライ一覧 -->
+  <div class="replies-section" *ngIf="tweet">
+    <h3>返信</h3>
+    
+    <div class="no-replies" *ngIf="replies.length === 0 && !isLoading">
+      まだ返信がありません。最初の返信を投稿してみましょう！
+    </div>
+
+    <div class="reply" *ngFor="let reply of replies">
+      <div class="avatar">{{ reply.user_name.charAt(0) }}</div>
+      <div class="reply-content">
+        <div class="reply-header">
+          <span class="user_name">{{ reply.user_name }}</span>
+          <span class="user-id">{{ reply.user_id }}</span>
+          <span class="timestamp">· {{ reply.created_at | date:'medium' }}</span>
+        </div>
+        <div class="reply-body">
+          {{ reply.reply_content }}
+        </div>
+        <div class="reply-actions">
+          <button class="action-btn delete-btn" *ngIf="reply.user_id === authService.currentUser?.user_id" (click)="deleteReply(reply)" title="削除">
+            <span class="icon">🗑️</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ページネーション -->
+    <div class="pagination" *ngIf="totalReplies > pageSize">
+      <button 
+        [disabled]="currentPage === 1" 
+        (click)="onPageChange(currentPage - 1)"
+        class="page-btn"
+      >
+        前へ
+      </button>
+      <span class="page-info">{{ currentPage }} / {{ Math.ceil(totalReplies / pageSize) }}</span>
+      <button 
+        [disabled]="currentPage >= Math.ceil(totalReplies / pageSize)" 
+        (click)="onPageChange(currentPage + 1)"
+        class="page-btn"
+      >
+        次へ
+      </button>
+    </div>
+  </div>
+</div>

@@ -167,4 +167,8 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
+  navigateToTweetDetail(tweet: Tweet): void {
+    this.router.navigate(['/tweet', tweet.tweet_id]);
+  }
 }
