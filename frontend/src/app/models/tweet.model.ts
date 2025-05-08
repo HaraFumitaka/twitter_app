@@ -1,20 +1,20 @@
 export interface Tweet {
   tweet_id: number;
-  content: string;
+  tweet_content: string;
   user_id: string;
   user_name: string;
   created_at: string;
-  likes_count: number;
-  retweets_count: number;
+  like_count: number;
+  retweet_count: number;
   replies_count: number;
-  bookmarks_count: number;
+  bookmark_count: number;
   is_liked: boolean;
   is_retweeted: boolean;
   is_bookmarked: boolean;
 }
 
 export interface TweetCreate {
-  content: string;
+  tweet_content: string;
 }
 
 export interface TweetList {

@@ -1,11 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
+<div class="home-container">
+  <div class="sidebar">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" class="twitter-icon">
+        <g>
+          <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
+        </g>
+      </svg>
+    </div>
+    <nav>
+      <ul>
+        <li class="active"><a href="#"><span class="icon">🏠</span> <span class="text">ホーム</span></a></li>
+        <li><a href="#"><span class="icon">🔍</span> <span class="text">検索</span></a></li>
+        <li><a href="#"><span class="icon">🔔</span> <span class="text">通知</span></a></li>
+        <li><a href="#"><span class="icon">✉️</span> <span class="text">メッセージ</span></a></li>
+        <li><a href="#"><span class="icon">🔖</span> <span class="text">ブックマーク</span></a></li>
+        <li><a href="#"><span class="icon">👤</span> <span class="text">プロフィール</span></a></li>
+      </ul>
+    </nav>
+    <button class="tweet-btn">ツイートする</button>
+    <div class="user-profile">
+      <div class="avatar">{{ user_name.charAt(0) }}</div>
+      <div class="user-info">
+        <div class="user_name">{{ user_name }}</div>
+        <button class="logout-btn" (click)="logout()">ログアウト</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <header class="header">
+      <h1>ホーム</h1>
+    </header>
+
+    <div class="tweet-composer">
+      <form [formGroup]="tweetForm" (ngSubmit)="postTweet()">
+        <div class="avatar">{{ user_name.charAt(0) }}</div>
+        <div class="compose-area">
+          <textarea
+            formControlName="tweet_content"
+            placeholder="いまどうしてる？"
+            rows="3"
+            maxlength="280"
+          ></textarea>
+          <div class="compose-footer">
+            <div class="char-count" [ngClass]="{'warning': tweetForm.get('tweet_content')?.value?.length > 260}">
+              {{ tweetForm.get('tweet_content')?.value?.length || 0 }}/280
+            </div>
+            <button
+              type="submit"
+              [disabled]="tweetForm.invalid || isLoading"
+              class="tweet-submit-btn"
+            >
+              {{ isLoading ? '投稿中...' : 'ツイートする' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="timeline">
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="loading" *ngIf="isLoading">
+        読み込み中...
+      </div>
+
+      <div class="no-tweets" *ngIf="tweets.length === 0 && !isLoading">
+        まだツイートがありません。最初のツイートを投稿してみましょう！
+      </div>
+
+      <div class="tweet" *ngFor="let tweet of tweets">
+        <div class="avatar">{{ tweet.user_name.charAt(0) }}</div>
+        <div class="tweet-content">
+          <div class="tweet-header">
+            <span class="user_name">{{ tweet.user_name }}</span>
+            <span class="user-id">{{ tweet.user_id }}</span>
+            <span class="timestamp">· {{ tweet.created_at | date:'medium' }}</span>
+          </div>
+          <div class="tweet-body">
+            {{ tweet.tweet_content }}
+          </div>
+          <div class="tweet-actions">
+            <button class="action-btn reply-btn" title="返信">
+              <span class="icon">💬</span>
+              <span class="count" *ngIf="tweet.replies_count > 0">{{ tweet.replies_count }}</span>
+            </button>
+            <button class="action-btn retweet-btn" [class.active]="tweet.is_retweeted" (click)="retweetTweet(tweet)" title="リツイート">
+              <span class="icon icon-retweet"></span>
+              <span class="count" *ngIf="tweet.retweet_count > 0">{{ tweet.retweet_count }}</span>
+            </button>
+            <button class="action-btn like-btn" [class.active]="tweet.is_liked" (click)="likeTweet(tweet)" title="いいね">
+              <span class="icon icon-like"></span>
+              <span class="count" *ngIf="tweet.like_count > 0">{{ tweet.like_count }}</span>
+            </button>
+            <button class="action-btn bookmark-btn" [class.active]="tweet.is_bookmarked" (click)="bookmarkTweet(tweet)" title="ブックマーク">
+              <span class="icon icon-bookmark"></span>
+              <span class="count" *ngIf="tweet.bookmark_count > 0">{{ tweet.bookmark_count }}</span>
+            </button>
+            <button *ngIf="tweet.user_id === authService.currentUser?.user_id" class="action-btn delete-btn" (click)="deleteTweet(tweet)" title="削除">
+              <span class="icon">🗑️</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ページネーション -->
+      <div class="pagination" *ngIf="totalTweets > pageSize">
+        <button 
+          [disabled]="currentPage === 1" 
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn"
+        >
+          前へ
+        </button>
+        <span class="page-info">{{ currentPage }} / {{ Math.ceil(totalTweets / pageSize) }}</span>
+        <button 
+          [disabled]="currentPage >= Math.ceil(totalTweets / pageSize)" 
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn"
+        >
+          次へ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-right">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="検索" class="search-input">
+    </div>
+    <div class="trends">
+      <h2>トレンド</h2>
+      <div class="trend-item">
+        <div class="trend-category">日本でトレンド</div>
+        <div class="trend-name">#サンプルタグ</div>
+        <div class="trend-count">10.5万 ツイート</div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-category">テクノロジー・トレンド</div>
+        <div class="trend-name">#プログラミング</div>
+        <div class="trend-count">5.2万 ツイート</div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-category">エンターテイメント・トレンド</div>
+        <div class="trend-name">#映画</div>
+        <div class="trend-count">3.7万 ツイート</div>
+      </div>
+    </div>
+  </div>
+</div>
