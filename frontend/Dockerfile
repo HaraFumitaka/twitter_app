@@ -15,10 +15,10 @@ RUN npm install -g @angular/cli
 
 # 起動スクリプトを修正して、必ず必要なパッケージをインストールする
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
-    echo 'cd /app' >> /entrypoint.sh && \
+    echo 'cd /frontend' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
     echo '# 既存プロジェクトかチェック' >> /entrypoint.sh && \
-    echo 'if [ -f "/app/package.json" ]; then' >> /entrypoint.sh && \
+    echo 'if [ -f "/frontend/package.json" ]; then' >> /entrypoint.sh && \
     echo '  echo "既存のAngularプロジェクトを検出しました"' >> /entrypoint.sh && \
     echo '  echo "依存関係をインストールしています..."' >> /entrypoint.sh && \
     echo '  npm install' >> /entrypoint.sh && \
