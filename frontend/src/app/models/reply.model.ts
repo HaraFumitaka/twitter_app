@@ -1,6 +1,6 @@
 export interface Reply {
   reply_id: number;
-  content: string;
+  reply_content: string;
   user_id: string;
   user_name: string;
   tweet_id: number;
@@ -9,7 +9,7 @@ export interface Reply {
 }
 
 export interface ReplyCreate {
-  content: string;
+  reply_content: string;
   parent_reply_id?: number;
 }
 

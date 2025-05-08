@@ -8,7 +8,7 @@ import { User, UserCreate, UserLogin } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5001'; // APIのベースURL（適宜調整してください）
+  private apiUrl = 'http://localhost:5001/api/auth'; // APIのベースURL（適宜調整してください）
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
   
@@ -18,20 +18,20 @@ export class AuthService {
   }
 
   register(user: UserCreate): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/api/auth/register`, user).pipe(
+    return this.http.post<User>(`${this.apiUrl}/register`, user).pipe(
       catchError(this.handleError)
     );
   }
 
   login(credentials: UserLogin): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/api/auth/login`, credentials, { withCredentials: true }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
       tap(() => this.checkAuthStatus()),
       catchError(this.handleError)
     );
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/api/auth/logout`, {}, { withCredentials: true }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
         this.currentUserSubject.next(null);
       }),
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   checkAuthStatus(): void {
-    this.http.get<User>(`${this.apiUrl}/api/auth/me`, { withCredentials: true })
+    this.http.get<User>(`${this.apiUrl}/me`, { withCredentials: true })
       .pipe(
         catchError(() => {
           this.currentUserSubject.next(null);
