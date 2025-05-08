@@ -18,6 +18,26 @@ services:
     ports:
     - 3306:3306
 
+  # テスト用DBコンテナを追加
+  test_db:
+    container_name: twitter-test-db
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_app_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - test_db_data:/var/lib/mysql
+      - ./database/log/mysql_test:/var/log/mysql
+      - ./database/my.conf:/etc/mysql/conf.d/my.conf
+      - ./database/test_init:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3306  # ホストの別ポートにマッピング
+
   backend:
     container_name: twitter-backend
     build:
@@ -30,6 +50,22 @@ services:
       DATABASE_URL: mysql://my_app_user:your_password@db:3306/my_app_db
     ports:
       - "5001:5000" # FastAPIのデフォルトポート
+    volumes:
+      - ./backend:/backend
+
+  # テスト用バックエンドを必要に応じて追加
+  test_backend:
+    container_name: twitter-test-backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: always
+    depends_on:
+      - test_db
+    environment:
+      DATABASE_URL: mysql://test_user:test_password@test_db:3307/test_app_db
+    ports:
+      - "5002:5000"  # テスト用の別ポート
     volumes:
       - ./backend:/backend
 
@@ -64,4 +100,5 @@ services:
 
 volumes:
   db_data:
+  test_db_data:
   # frontend_node_modules:
