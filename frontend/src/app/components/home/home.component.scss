@@ -1,0 +1,485 @@
+.home-container {
+  display: flex;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+// サイドバー
+.sidebar {
+  width: 275px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+}
+
+.logo {
+  padding: 12px;
+  margin-top: 4px;
+}
+
+.twitter-icon {
+  width: 30px;
+  height: 30px;
+  fill: #1da1f2;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin: 4px 0;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 30px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  transition: background-color 0.2s;
+}
+
+nav a:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
+nav li.active a {
+  font-weight: 700;
+}
+
+.icon {
+  margin-right: 16px;
+  font-size: 24px;
+}
+
+.icon-like::before {
+  content: "♡";
+}
+
+.active .icon-like::before {
+  content: "❤️";
+}
+
+.icon-retweet::before {
+  content: "🔁";
+}
+
+.active .icon-retweet::before {
+  content: "🔄";
+}
+
+.icon-bookmark::before {
+  content: "📖";
+}
+
+.active .icon-bookmark::before {
+  content: "📕";
+}
+
+
+.tweet-btn {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 30px;
+  background-color: #1da1f2;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tweet-btn:hover {
+  background-color: #1a91da;
+}
+
+.user-profile {
+  margin-top: auto;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.user-profile:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1da1f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.user-info {
+  margin-left: 12px;
+}
+
+.user_name {
+  font-weight: 700;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #1da1f2;
+  padding: 0;
+  margin-top: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+// メインコンテンツ
+.main-content {
+  flex: 1;
+  border-right: 1px solid #eee;
+  min-width: 0;
+}
+
+.header {
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eee;
+  z-index: 10;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tweet-composer {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+}
+
+.avatar {
+  margin-right: 12px;
+}
+
+.compose-area {
+  flex: 1;
+}
+
+textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 18px;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.compose-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.char-count {
+  color: #657786;
+}
+
+.char-count.warning {
+  color: #e0245e;
+}
+
+.tweet-submit-btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  background-color: #1da1f2;
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tweet-submit-btn:hover {
+  background-color: #1a91da;
+}
+
+.tweet-submit-btn:disabled {
+  background-color: #9fd0f8;
+  cursor: not-allowed;
+}
+
+.timeline {
+  padding: 0;
+}
+
+.tweet {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+}
+
+.tweet-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tweet-header {
+  margin-bottom: 4px;
+}
+
+.user_name {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.user-id, .timestamp {
+  color: #657786;
+  font-size: 14px;
+}
+
+.tweet-body {
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+.tweet-actions {
+  display: flex;
+  justify-content: space-between;
+  max-width: 425px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #657786;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+  color: #1da1f2;
+}
+
+.action-btn.active {
+  color: #1da1f2;
+}
+
+.like-btn.active {
+  color: #e0245e;
+}
+
+.retweet-btn.active {
+  color: #17bf63;
+}
+
+.bookmark-btn.active {
+  color: #794bc4;
+}
+
+.count {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+.loading, .no-tweets, .error-message {
+  padding: 20px;
+  text-align: center;
+  color: #657786;
+}
+
+.error-message {
+  color: #e0245e;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  background-color: white;
+  color: #1da1f2;
+  border: 1px solid #1da1f2;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.page-btn:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
+.page-btn:disabled {
+  color: #9fd0f8;
+  border-color: #9fd0f8;
+  cursor: not-allowed;
+}
+
+.page-info {
+  margin: 0 16px;
+  color: #657786;
+}
+
+// 右サイドバー
+.sidebar-right {
+  width: 350px;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.search-box {
+  position: relative;
+  margin: 12px 0;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #657786;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 30px;
+  border: none;
+  background-color: #f5f8fa;
+  font-size: 15px;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+.search-input:focus {
+  background-color: white;
+  box-shadow: 0 0 0 1px #1da1f2;
+}
+
+.trends {
+  background-color: #f5f8fa;
+  border-radius: 16px;
+  margin-top: 16px;
+}
+
+.trends h2 {
+  padding: 16px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.trend-item {
+  padding: 16px;
+  border-top: 1px solid #e6ecf0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.trend-item:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.trend-category, .trend-count {
+  font-size: 13px;
+  color: #657786;
+}
+
+.trend-name {
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+// レスポンシブ対応
+@media (max-width: 1280px) {
+  .sidebar-right {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 88px;
+  }
+  
+  .sidebar .text {
+    display: none;
+  }
+  
+  .sidebar .tweet-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidebar .tweet-btn::after {
+    content: "✏️";
+  }
+  
+  .sidebar .tweet-btn span {
+    display: none;
+  }
+  
+  .user-profile .user-info {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar {
+    width: 68px;
+    padding: 0 8px;
+  }
+
+  .compose-footer {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .char-count {
+    margin-bottom: 8px;
+  }
+}

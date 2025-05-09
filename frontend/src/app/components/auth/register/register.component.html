@@ -1,0 +1,113 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>アカウント登録</h2>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="user_id">ユーザーID</label>
+        <input 
+          type="text" 
+          id="user_id" 
+          formControlName="user_id" 
+          class="form-control"
+          [ngClass]="{'invalid': registerForm.get('user_id')?.invalid && registerForm.get('user_id')?.touched}"
+        >
+        <div class="error-message" *ngIf="registerForm.get('user_id')?.invalid && registerForm.get('user_id')?.touched">
+          <span *ngIf="registerForm.get('user_id')?.errors?.['required']">ユーザーIDは必須です</span>
+          <span *ngIf="registerForm.get('user_id')?.errors?.['pattern']">英数字、ハイフン、アンダースコアのみ使用できます</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_name">表示名</label>
+        <input 
+          type="text" 
+          id="user_name" 
+          formControlName="user_name" 
+          class="form-control"
+          [ngClass]="{'invalid': registerForm.get('user_name')?.invalid && registerForm.get('user_name')?.touched}"
+        >
+        <div class="error-message" *ngIf="registerForm.get('user_name')?.invalid && registerForm.get('user_name')?.touched">
+          <span *ngIf="registerForm.get('user_name')?.errors?.['required']">表示名は必須です</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone_number">電話番号</label>
+        <input 
+          type="text" 
+          id="phone_number" 
+          formControlName="phone_number" 
+          class="form-control"
+          [ngClass]="{'invalid': registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched}"
+        >
+        <div class="error-message" *ngIf="registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched">
+          <span *ngIf="registerForm.get('phone_number')?.errors?.['required']">電話番号は必須です</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="e_mail">メールアドレス</label>
+        <input 
+          type="email" 
+          id="e_mail" 
+          formControlName="e_mail" 
+          class="form-control"
+          [ngClass]="{'invalid': registerForm.get('e_mail')?.invalid && registerForm.get('e_mail')?.touched}"
+        >
+        <div class="error-message" *ngIf="registerForm.get('e_mail')?.invalid && registerForm.get('e_mail')?.touched">
+          <span *ngIf="registerForm.get('e_mail')?.errors?.['required']">メールアドレスは必須です</span>
+          <span *ngIf="registerForm.get('e_mail')?.errors?.['email']">有効なメールアドレスを入力してください</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">パスワード</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          class="form-control"
+          [ngClass]="{'invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
+        >
+        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">パスワードは必須です</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">パスワードは6文字以上必要です</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">パスワード（確認）</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          class="form-control"
+          [ngClass]="{'invalid': (registerForm.get('confirmPassword')?.invalid || registerForm.hasError('mismatch')) && registerForm.get('confirmPassword')?.touched}"
+        >
+        <div class="error-message" *ngIf="(registerForm.get('confirmPassword')?.invalid || registerForm.hasError('mismatch')) && registerForm.get('confirmPassword')?.touched">
+          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">パスワード（確認）は必須です</span>
+          <span *ngIf="registerForm.hasError('mismatch')">パスワードが一致しません</span>
+        </div>
+      </div>
+      
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          [disabled]="registerForm.invalid || isLoading" 
+          class="btn-primary"
+        >
+          {{ isLoading ? '登録中...' : '登録する' }}
+        </button>
+      </div>
+      
+      <div class="form-footer">
+        すでにアカウントをお持ちの方は <a routerLink="/login">ログイン</a> してください
+      </div>
+    </form>
+  </div>
+</div>

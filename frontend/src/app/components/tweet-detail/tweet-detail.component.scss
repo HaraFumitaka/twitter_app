@@ -1,0 +1,290 @@
+.tweet-detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e1e8ed;
+  margin-bottom: 16px;
+  
+  .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 20px;
+    
+    &:hover {
+      color: #1da1f2;
+    }
+  }
+  
+  h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+.error-message {
+  color: #e0245e;
+  margin: 16px 0;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px 0;
+  color: #657786;
+}
+
+.tweet-detail {
+  display: flex;
+  padding: 16px 0;
+  border-bottom: 1px solid #e1e8ed;
+  
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #1da1f2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 12px;
+  }
+  
+  .tweet-content {
+    flex: 1;
+    
+    .tweet-header {
+      margin-bottom: 4px;
+      
+      .user_name {
+        font-weight: bold;
+        margin-right: 4px;
+      }
+      
+      .user-id, .timestamp {
+        color: #657786;
+        font-size: 14px;
+      }
+    }
+    
+    .tweet-body {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      word-wrap: break-word;
+    }
+    
+    .tweet-stats {
+      display: flex;
+      padding: 12px 0;
+      border-top: 1px solid #e1e8ed;
+      border-bottom: 1px solid #e1e8ed;
+      
+      .stat {
+        margin-right: 20px;
+        color: #657786;
+      }
+    }
+    
+    .tweet-actions {
+      display: flex;
+      margin-top: 12px;
+      
+      .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-right: 60px;
+        color: #657786;
+        
+        &:hover {
+          color: #1da1f2;
+        }
+        
+        &.active {
+          color: #1da1f2;
+        }
+        
+        .icon {
+          font-size: 18px;
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+}
+
+.reply-composer {
+  display: flex;
+  padding: 16px 0;
+  border-bottom: 1px solid #e1e8ed;
+  
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #1da1f2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  
+  .compose-area {
+    flex: 1;
+    
+    textarea {
+      width: 100%;
+      border: none;
+      resize: none;
+      font-size: 16px;
+      outline: none;
+      padding: 8px 0;
+      font-family: inherit;
+    }
+    
+    .compose-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .char-count {
+        color: #657786;
+        font-size: 14px;
+        
+        &.warning {
+          color: #e0245e;
+        }
+      }
+      
+      .reply-submit-btn {
+        background-color: #1da1f2;
+        color: white;
+        border: none;
+        border-radius: 9999px;
+        padding: 8px 16px;
+        font-weight: bold;
+        cursor: pointer;
+        
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.replies-section {
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 16px 0;
+  }
+  
+  .no-replies {
+    color: #657786;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .reply {
+    display: flex;
+    padding: 16px 0;
+    border-bottom: 1px solid #e1e8ed;
+    
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #1da1f2;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    
+    .reply-content {
+      flex: 1;
+      
+      .reply-header {
+        margin-bottom: 4px;
+        
+        .user_name {
+          font-weight: bold;
+          margin-right: 4px;
+        }
+        
+        .user-id, .timestamp {
+          color: #657786;
+          font-size: 14px;
+        }
+      }
+      
+      .reply-body {
+        font-size: 16px;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        word-wrap: break-word;
+      }
+      
+      .reply-actions {
+        display: flex;
+        justify-content: flex-end;
+        
+        .action-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #657786;
+          
+          &:hover {
+            color: #e0245e;
+          }
+        }
+      }
+    }
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    
+    .page-btn {
+      background-color: #f5f8fa;
+      border: 1px solid #e1e8ed;
+      border-radius: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+    
+    .page-info {
+      margin: 0 12px;
+      color: #657786;
+    }
+  }
+}
